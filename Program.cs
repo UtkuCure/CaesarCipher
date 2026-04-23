@@ -8,10 +8,11 @@ internal class Program
     
     public static void Main(string[] args)
     {
+        char currentLetter;
         int currentLettersAlphabetIndex;
         int AlphabetLength = turkishAlphabet.Count;
         int AlphabetLastIndex = turkishAlphabet.Count - 1;
-        
+        int letterCounter = 0;
         
         GetTurkishAlphabetFromEnvironment();
         
@@ -29,7 +30,35 @@ internal class Program
         
         for (int i = 0; i < outputText.Count; i++)
         {
+            currentLetter = outputText[i];
+            currentLettersAlphabetIndex = turkishAlphabet.IndexOf(currentLetter);
             
+            foreach (char c in turkishAlphabet)
+            {
+                if (outputText[i] != c)
+                {
+                    letterCounter += 1;
+                }
+            }
+
+            if (letterCounter == AlphabetLastIndex)
+            {
+                continue;
+            }
+
+            if (currentLettersAlphabetIndex + scrollNumber > AlphabetLastIndex)
+            {
+                outputText[i] = turkishAlphabet[(currentLettersAlphabetIndex + scrollNumber) - AlphabetLength];
+            }
+            else if (currentLettersAlphabetIndex + scrollNumber < 0)
+            {
+                outputText[i] = turkishAlphabet[(currentLettersAlphabetIndex + scrollNumber) +  AlphabetLength];
+            }
+            else
+            {
+                outputText[i] = turkishAlphabet[currentLettersAlphabetIndex + scrollNumber];
+            }
+            letterCounter = 0;
         }
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -49,6 +78,7 @@ internal class Program
             Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
             return;
         }
+        
         turkishAlphabet = rawAlphabet.ToCharArray().ToList();
     }
 }
