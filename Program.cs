@@ -41,7 +41,6 @@ internal class Program
     private static void GetTurkishAlphabetFromEnvironment()
     {
         Env.Load();
-        List<char> turkishAlphabet = new List<char>();
             
         string rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
 
@@ -51,6 +50,5 @@ internal class Program
             return;
         }
         turkishAlphabet = rawAlphabet.ToCharArray().ToList();
-        
     }
 }
