@@ -4,6 +4,8 @@ namespace CaesarCipher;
 
 internal class Program
 {
+    static List<char> turkishAlphabet = new List<char>();
+    
     public static void Main(string[] args)
     {
         int currentLettersAlphabetIndex;
