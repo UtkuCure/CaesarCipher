@@ -1,7 +1,28 @@
-﻿using DotNetEnv;
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Utku Cüre, UtkuCure
+
+/*
+ * This is a simple Caesar Cipher implementation in C#. It takes a user input string and a scroll number, then shifts
+ * each letter in the string by the specified number of positions in the Turkish alphabet. The Turkish alphabet is
+ * loaded from an environment variable for flexibility. Non-alphabet characters are left unchanged. The final encrypted
+ * text is displayed to the user.
+ * 
+ * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING AN IMPORTANT DATA, USE THIS FOR FUN ONLY!
+ * 
+ * The Caesar Cipher is a very basic encryption technique and can be easily broken, so it should not be used for secure
+ * data encryption.
+ *
+ * WARNING [Current State] THIS PROJECT IS UNDER DEVELOPMENT
+ * The core shifting algorithm is currently being refactored. Some edge cases in Turkish alphabet might not produce the
+ * expected output.
+ * 
+ * Author: Utku Cüre, UtkuCure
+ * Date: 23/04/2026
+ */
+
+using DotNetEnv;
 
 namespace CaesarCipher;
-
 internal class Program
 {
     static List<char> turkishAlphabet = new List<char>();
@@ -29,6 +50,9 @@ internal class Program
 
         List<char> outputText = inputText.ToLower().ToCharArray().ToList();
         
+        // ======================================
+        // WARNING: WORK IN PROGRESS
+        // ======================================
         for (int i = 0; i < outputText.Count; i++)
         {
             currentLetter = outputText[i];
