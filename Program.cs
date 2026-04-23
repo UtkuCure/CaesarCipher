@@ -6,18 +6,18 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-            List<char> turkishAlphabet = new List<char>();
+        Env.Load();
+        List<char> turkishAlphabet = new List<char>();
             
-            string rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
-            turkishAlphabet = rawAlphabet.ToCharArray().ToList();
-            
-            //Test
-            Console.WriteLine(turkishAlphabet.Count);
-            Console.WriteLine(turkishAlphabet[0]);
-            Console.WriteLine(turkishAlphabet[1]);
-            int lastIndex =  turkishAlphabet.Count - 1;
-            Console.WriteLine(lastIndex);
-            Console.WriteLine(turkishAlphabet[lastIndex]);
+        string rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
+
+        if (rawAlphabet is null)
+        {
+            Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
+            return;
+        }
+        
+        turkishAlphabet = rawAlphabet.ToCharArray().ToList();
         
     }
 }
