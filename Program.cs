@@ -25,6 +25,7 @@ internal class Program
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter the number of scroll (-3, +3): ");
         int scrollNumber = int.Parse(Console.ReadLine());
+        Console.ResetColor();
 
         List<char> outputText = inputText.ToLower().ToCharArray().ToList();
         
@@ -62,8 +63,8 @@ internal class Program
         }
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
-        outputText.ToString();
-        Console.Write(outputText);
+        string finalOutput = new string(outputText.ToArray());
+        Console.Write(finalOutput);
         Console.ResetColor();
     }
 
