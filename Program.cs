@@ -6,5 +6,6 @@ internal class Program
     {
         Console.WriteLine("Hello, World!");
         Console.WriteLine("This is a test for SSH key!");
+        Console.WriteLine("This is a test for password!");
     }
 }
