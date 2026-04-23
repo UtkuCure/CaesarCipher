@@ -50,7 +50,6 @@ internal class Program
             Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
             return;
         }
-        
         turkishAlphabet = rawAlphabet.ToCharArray().ToList();
         
     }
