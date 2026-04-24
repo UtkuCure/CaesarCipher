@@ -19,7 +19,7 @@ using DotNetEnv;
 using System.Globalization;
 
 namespace CaesarCipher;
-internal class Program
+public class Program
 {
     static List<char> turkishAlphabet = new List<char>();
     
@@ -42,7 +42,17 @@ internal class Program
         int scrollNumber = int.Parse(Console.ReadLine());
 
         List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
+
+        EncryptWithCaesarCipher(outputText, scrollNumber, AlphabetLength);
         
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        string finalOutput = new string(outputText.ToArray());
+        Console.Write(finalOutput);
+        Console.ResetColor();
+    }
+
+    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int AlphabetLength)
+    {
         for (int i = 0; i < outputText.Count; i++)
         {
             char currentLetter = outputText[i];
@@ -53,15 +63,11 @@ internal class Program
                 continue;
             }
             
-            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % AlphabetLength + AlphabetLength) % AlphabetLength;
+            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
+                AlphabetLength + AlphabetLength) % AlphabetLength;
             currentLetter = turkishAlphabet[newIndex];
             outputText[i] = currentLetter;
         }
-        
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        string finalOutput = new string(outputText.ToArray());
-        Console.Write(finalOutput);
-        Console.ResetColor();
     }
 
     private static void GetTurkishAlphabetFromEnvironment()
