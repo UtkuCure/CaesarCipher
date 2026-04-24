@@ -4,10 +4,9 @@
 /*
  * This is a simple Caesar Cipher implementation in C#. It takes a user input string and a scroll number, then shifts
  * each letter in the string by the specified number of positions in the Turkish alphabet. The Turkish alphabet is
- * loaded from an environment variable for flexibility. Non-alphabet characters are left unchanged. The final encrypted
- * text is displayed to the user.
+ * loaded from an environment variable for flexibility. Non-alphabet characters are left unchanged.
  * 
- * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING AN IMPORTANT DATA, USE THIS FOR FUN ONLY!
+ * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING AN IMPORTANT DATA, USE THIS EDUCATION PURPOSE ONLY!
  * 
  * The Caesar Cipher is a very basic encryption technique and can be easily broken, so it should not be used for secure
  * data encryption.
