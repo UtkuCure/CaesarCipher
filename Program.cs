@@ -11,15 +11,12 @@
  * The Caesar Cipher is a very basic encryption technique and can be easily broken, so it should not be used for secure
  * data encryption.
  *
- * WARNING [Current State] THIS PROJECT IS UNDER DEVELOPMENT
- * The core shifting algorithm is currently being refactored. Some edge cases in Turkish alphabet might not produce the
- * expected output.
- * 
  * Author: Utku Cüre, UtkuCure
  * Date: 23/04/2026
  */
 
 using DotNetEnv;
+using System.Globalization;
 
 namespace CaesarCipher;
 internal class Program
@@ -28,13 +25,10 @@ internal class Program
     
     public static void Main(string[] args)
     {
-        char currentLetter;
-        int currentLettersAlphabetIndex;
+        GetTurkishAlphabetFromEnvironment();
+        
         int AlphabetLength = turkishAlphabet.Count;
         int AlphabetLastIndex = turkishAlphabet.Count - 1;
-        int letterCounter = 0;
-        
-        GetTurkishAlphabetFromEnvironment();
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter a text you want to encrypt: ");
@@ -46,44 +40,22 @@ internal class Program
         Console.Write("Enter the number of scroll (-3, +3): ");
         Console.ResetColor();
         int scrollNumber = int.Parse(Console.ReadLine());
-        Console.ResetColor();
 
-        List<char> outputText = inputText.ToLower().ToCharArray().ToList();
+        List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
         
-        // ======================================
-        // WARNING: WORK IN PROGRESS
-        // ======================================
         for (int i = 0; i < outputText.Count; i++)
         {
-            currentLetter = outputText[i];
-            currentLettersAlphabetIndex = turkishAlphabet.IndexOf(currentLetter);
-            
-            foreach (char c in turkishAlphabet)
-            {
-                if (outputText[i] != c)
-                {
-                    letterCounter += 1;
-                }
-            }
+            char currentLetter = outputText[i];
+            int currentLettersAlphabetIndex = turkishAlphabet.IndexOf(currentLetter);
 
-            if (letterCounter == AlphabetLastIndex)
+            if (!turkishAlphabet.Contains(currentLetter))
             {
                 continue;
             }
-
-            if (currentLettersAlphabetIndex + scrollNumber > AlphabetLastIndex)
-            {
-                outputText[i] = turkishAlphabet[(currentLettersAlphabetIndex + scrollNumber) - AlphabetLength];
-            }
-            else if (currentLettersAlphabetIndex + scrollNumber < 0)
-            {
-                outputText[i] = turkishAlphabet[(currentLettersAlphabetIndex + scrollNumber) +  AlphabetLength];
-            }
-            else
-            {
-                outputText[i] = turkishAlphabet[currentLettersAlphabetIndex + scrollNumber];
-            }
-            letterCounter = 0;
+            
+            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % AlphabetLength + AlphabetLength) % AlphabetLength;
+            currentLetter = turkishAlphabet[newIndex];
+            outputText[i] = currentLetter;
         }
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
