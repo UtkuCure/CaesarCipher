@@ -21,14 +21,14 @@ using System.Globalization;
 namespace CaesarCipher;
 public class Program
 {
-    static List<char> turkishAlphabet = new List<char>();
+    static List<char> _turkishAlphabet = new List<char>();
     
     public static void Main(string[] args)
     {
         GetTurkishAlphabetFromEnvironment();
         
-        int AlphabetLength = turkishAlphabet.Count;
-        int AlphabetLastIndex = turkishAlphabet.Count - 1;
+        int AlphabetLength = _turkishAlphabet.Count;
+        int AlphabetLastIndex = _turkishAlphabet.Count - 1;
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter a text you want to encrypt: ");
@@ -56,16 +56,16 @@ public class Program
         for (int i = 0; i < outputText.Count; i++)
         {
             char currentLetter = outputText[i];
-            int currentLettersAlphabetIndex = turkishAlphabet.IndexOf(currentLetter);
+            int currentLettersAlphabetIndex = _turkishAlphabet.IndexOf(currentLetter);
 
-            if (!turkishAlphabet.Contains(currentLetter))
+            if (!_turkishAlphabet.Contains(currentLetter))
             {
                 continue;
             }
             
             int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
                 AlphabetLength + AlphabetLength) % AlphabetLength;
-            currentLetter = turkishAlphabet[newIndex];
+            currentLetter = _turkishAlphabet[newIndex];
             outputText[i] = currentLetter;
         }
     }
@@ -82,6 +82,6 @@ public class Program
             return;
         }
         
-        turkishAlphabet = rawAlphabet.ToCharArray().ToList();
+        _turkishAlphabet = rawAlphabet.ToCharArray().ToList();
     }
 }
