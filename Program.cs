@@ -44,6 +44,7 @@ internal class Program
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter the number of scroll (-3, +3): ");
+        Console.ResetColor();
         int scrollNumber = int.Parse(Console.ReadLine());
         Console.ResetColor();
 
