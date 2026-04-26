@@ -21,12 +21,18 @@ using System.Globalization;
 namespace CaesarCipher;
 internal class Program
 {
-    static List<char> turkishAlphabet = new List<char>();
+    static List<char>? turkishAlphabet = new List<char>();
     
     public static void Main(string[] args)
     {
         GetTurkishAlphabetFromEnvironment();
-        
+
+
+        if (turkishAlphabet is null)
+        {
+            Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
+            return;
+        }
         int AlphabetLength = turkishAlphabet.Count;
         int AlphabetLastIndex = turkishAlphabet.Count - 1;
         
@@ -79,7 +85,7 @@ internal class Program
     {
         Env.Load();
             
-        string rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
+        string? rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
 
         if (rawAlphabet is null)
         {
