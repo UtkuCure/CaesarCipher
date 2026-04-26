@@ -34,7 +34,12 @@ internal class Program
         Console.Write("Enter a text you want to encrypt: ");
         Console.ResetColor();
         
-        string inputText = Console.ReadLine();
+        string? inputText = Console.ReadLine();
+        if (inputText is null) 
+        {
+            Console.WriteLine("Input cannot be null, exiting...");
+            return;
+        }
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter the number of scroll (-3, +3): ");
