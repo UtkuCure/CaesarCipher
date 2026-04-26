@@ -44,7 +44,13 @@ internal class Program
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter the number of scroll (-3, +3): ");
         Console.ResetColor();
-        int scrollNumber = int.Parse(Console.ReadLine());
+        
+        string? inputScrollNumber = Console.ReadLine();
+        if(int.TryParse(inputScrollNumber, out int scrollNumber) == false)
+        {
+            Console.WriteLine("Invalid scroll number, exiting...");
+            return;
+        }
 
         List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
         
