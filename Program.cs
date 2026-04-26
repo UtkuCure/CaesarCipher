@@ -19,15 +19,15 @@ using DotNetEnv;
 using System.Globalization;
 
 namespace CaesarCipher;
-internal class Program
+public class Program
 {
     static List<char>? turkishAlphabet = new List<char>();
+    static List<char> _turkishAlphabet = new List<char>();
     
     public static void Main(string[] args)
     {
         GetTurkishAlphabetFromEnvironment();
-
-
+        
         if (turkishAlphabet is null)
         {
             Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
@@ -59,26 +59,32 @@ internal class Program
         }
 
         List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
-        
-        for (int i = 0; i < outputText.Count; i++)
-        {
-            char currentLetter = outputText[i];
-            int currentLettersAlphabetIndex = turkishAlphabet.IndexOf(currentLetter);
 
-            if (!turkishAlphabet.Contains(currentLetter))
-            {
-                continue;
-            }
-            
-            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % AlphabetLength + AlphabetLength) % AlphabetLength;
-            currentLetter = turkishAlphabet[newIndex];
-            outputText[i] = currentLetter;
-        }
+        EncryptWithCaesarCipher(outputText, scrollNumber, AlphabetLength);
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         string finalOutput = new string(outputText.ToArray());
         Console.Write(finalOutput);
         Console.ResetColor();
+    }
+
+    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int AlphabetLength)
+    {
+        for (int i = 0; i < outputText.Count; i++)
+        {
+            char currentLetter = outputText[i];
+            int currentLettersAlphabetIndex = _turkishAlphabet.IndexOf(currentLetter);
+
+            if (!_turkishAlphabet.Contains(currentLetter))
+            {
+                continue;
+            }
+            
+            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
+                AlphabetLength + AlphabetLength) % AlphabetLength;
+            currentLetter = _turkishAlphabet[newIndex];
+            outputText[i] = currentLetter;
+        }
     }
 
     private static void GetTurkishAlphabetFromEnvironment()
@@ -93,6 +99,6 @@ internal class Program
             return;
         }
         
-        turkishAlphabet = rawAlphabet.ToCharArray().ToList();
+        _turkishAlphabet = rawAlphabet.ToCharArray().ToList();
     }
 }
