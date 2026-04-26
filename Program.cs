@@ -21,20 +21,14 @@ using System.Globalization;
 namespace CaesarCipher;
 public class Program
 {
-    static List<char>? turkishAlphabet = new List<char>();
     static List<char> _turkishAlphabet = new List<char>();
     
     public static void Main(string[] args)
     {
         GetTurkishAlphabetFromEnvironment();
         
-        if (turkishAlphabet is null)
-        {
-            Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
-            return;
-        }
-        int AlphabetLength = turkishAlphabet.Count;
-        int AlphabetLastIndex = turkishAlphabet.Count - 1;
+        int alphabetLength = _turkishAlphabet.Count;
+        int alphabetLastIndex = _turkishAlphabet.Count - 1;
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter a text you want to encrypt: ");
@@ -60,7 +54,7 @@ public class Program
 
         List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
 
-        EncryptWithCaesarCipher(outputText, scrollNumber, AlphabetLength);
+        EncryptWithCaesarCipher(outputText, scrollNumber, alphabetLength);
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         string finalOutput = new string(outputText.ToArray());
@@ -68,7 +62,7 @@ public class Program
         Console.ResetColor();
     }
 
-    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int AlphabetLength)
+    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int alphabetLength)
     {
         for (int i = 0; i < outputText.Count; i++)
         {
@@ -81,7 +75,7 @@ public class Program
             }
             
             int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
-                AlphabetLength + AlphabetLength) % AlphabetLength;
+                alphabetLength + alphabetLength) % alphabetLength;
             currentLetter = _turkishAlphabet[newIndex];
             outputText[i] = currentLetter;
         }
