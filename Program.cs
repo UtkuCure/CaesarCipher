@@ -6,7 +6,7 @@
  * each letter in the string by the specified number of positions in the Turkish alphabet. The Turkish alphabet is
  * loaded from an environment variable for flexibility. Non-alphabet characters are left unchanged.
  * 
- * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING IMPORTANT DATA, USE THIS EDUCATION PURPOSE ONLY!
+ * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING AN IMPORTANT DATA, USE THIS EDUCATION PURPOSE ONLY!
  * 
  * The Caesar Cipher is a very basic encryption technique and can be easily broken, so it should not be used for secure
  * data encryption.
@@ -27,8 +27,8 @@ public class Program
     {
         GetTurkishAlphabetFromEnvironment();
         
-        int alphabetLength = _turkishAlphabet.Count;
-        int alphabetLastIndex = _turkishAlphabet.Count - 1;
+        int AlphabetLength = _turkishAlphabet.Count;
+        int AlphabetLastIndex = _turkishAlphabet.Count - 1;
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter a text you want to encrypt: ");
@@ -43,7 +43,7 @@ public class Program
 
         List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
 
-        EncryptWithCaesarCipher(outputText, scrollNumber, alphabetLength);
+        EncryptWithCaesarCipher(outputText, scrollNumber, AlphabetLength);
         
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         string finalOutput = new string(outputText.ToArray());
@@ -51,7 +51,7 @@ public class Program
         Console.ResetColor();
     }
 
-    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int alphabetLength)
+    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int AlphabetLength)
     {
         for (int i = 0; i < outputText.Count; i++)
         {
@@ -64,7 +64,7 @@ public class Program
             }
             
             int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
-                alphabetLength + alphabetLength) % alphabetLength;
+                AlphabetLength + AlphabetLength) % AlphabetLength;
             currentLetter = _turkishAlphabet[newIndex];
             outputText[i] = currentLetter;
         }
