@@ -28,7 +28,6 @@ public class Program
         GetTurkishAlphabetFromEnvironment();
         
         int alphabetLength = _turkishAlphabet.Count;
-        int alphabetLastIndex = _turkishAlphabet.Count - 1;
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Enter a text you want to encrypt: ");
