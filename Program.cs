@@ -11,6 +11,17 @@
  * The Caesar Cipher is a very basic encryption technique and can be easily broken, so it should not be used for secure
  * data encryption.
  *
+ * You can import this project to your project
+ * How to use:
+ *     implement it to your project
+ *     create an instance of the class
+ *     call the method EncryptWithCaesarCipher with the appropriate parameters
+ *
+ * If you want to use it on terminal:
+ *     dotnet run
+ *     enter a text you want to encrypt
+ *     enter a number of scroll (positive for right shift, negative for left shift) - you can use negative for decrypt
+ *
  * Author: Utku Cüre, UtkuCure
  * Date: 23/04/2026
  */
