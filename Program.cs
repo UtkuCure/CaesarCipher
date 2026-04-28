@@ -116,19 +116,4 @@ public class Program
             outputText[i] = currentLetter;
         }
     }
-
-    private static void GetTurkishAlphabetFromEnvironment()
-    {
-        Env.Load();
-            
-        string? rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
-
-        if (rawAlphabet is null)
-        {
-            Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
-            return;
-        }
-        
-        _alphabet = rawAlphabet.ToCharArray().ToList();
-    }
 }
