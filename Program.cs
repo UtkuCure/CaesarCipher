@@ -32,7 +32,7 @@ using System.Globalization;
 namespace CaesarCipher;
 public class Program
 {
-    static List<char> _turkishAlphabet = new List<char>();
+    static List<char> _alphabet = new List<char>();
     private static string? _rawAlphabet;
     
     public static void Main(string[] args)
@@ -53,10 +53,15 @@ public class Program
         {
             _rawAlphabet = "abcdefghijklmnopqrstuvwxyz";
         }
+
+        if (_rawAlphabet is null)
+        {
+            Console.WriteLine("Please enter a valid alphabet (e/t, turkish, english): ");
+            return;
+        }
+        _alphabet = _rawAlphabet.ToCharArray().ToList();
         
-        _turkishAlphabet = _rawAlphabet.ToCharArray().ToList();
-        
-        int alphabetLength = _turkishAlphabet.Count;
+        int alphabetLength = _alphabet.Count;
 
         while (true)
         {
@@ -98,16 +103,16 @@ public class Program
         for (int i = 0; i < outputText.Count; i++)
         {
             char currentLetter = outputText[i];
-            int currentLettersAlphabetIndex = _turkishAlphabet.IndexOf(currentLetter);
+            int currentLettersAlphabetIndex = _alphabet.IndexOf(currentLetter);
 
-            if (!_turkishAlphabet.Contains(currentLetter))
+            if (!_alphabet.Contains(currentLetter))
             {
                 continue;
             }
             
             int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
                 alphabetLength + alphabetLength) % alphabetLength;
-            currentLetter = _turkishAlphabet[newIndex];
+            currentLetter = _alphabet[newIndex];
             outputText[i] = currentLetter;
         }
     }
@@ -124,6 +129,6 @@ public class Program
             return;
         }
         
-        _turkishAlphabet = rawAlphabet.ToCharArray().ToList();
+        _alphabet = rawAlphabet.ToCharArray().ToList();
     }
 }
