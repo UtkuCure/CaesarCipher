@@ -33,10 +33,14 @@ namespace CaesarCipher;
 public class Program
 {
     static List<char> _turkishAlphabet = new List<char>();
+    private static string? _rawAlphabet;
     
     public static void Main(string[] args)
     {
-        GetTurkishAlphabetFromEnvironment();
+        //GetTurkishAlphabetFromEnvironment();
+        
+        _rawAlphabet = "abcçdefgğhıijklmnoöprsştuüvyz";
+        _turkishAlphabet = _rawAlphabet.ToCharArray().ToList();
         
         int alphabetLength = _turkishAlphabet.Count;
         
