@@ -32,44 +32,70 @@ using System.Globalization;
 namespace CaesarCipher;
 public class Program
 {
-    static List<char> _turkishAlphabet = new List<char>();
+    static List<char> _alphabet = new List<char>();
+    private static string? _rawAlphabet;
     
     public static void Main(string[] args)
     {
-        GetTurkishAlphabetFromEnvironment();
-        
-        int alphabetLength = _turkishAlphabet.Count;
-        
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write("Enter a text you want to encrypt: ");
-        Console.ResetColor();
-        
-        string? inputText = Console.ReadLine();
-        if (inputText is null) 
-        {
-            Console.WriteLine("Input cannot be null, exiting...");
-            return;
-        }
-        
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write("Enter the number of scroll (-3, +3): ");
-        Console.ResetColor();
-        
-        string? inputScrollNumber = Console.ReadLine();
-        if(int.TryParse(inputScrollNumber, out int scrollNumber) == false)
-        {
-            Console.WriteLine("Invalid scroll number, exiting...");
-            return;
-        }
-
-        List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
-
-        EncryptWithCaesarCipher(outputText, scrollNumber, alphabetLength);
-        
         Console.ForegroundColor = ConsoleColor.DarkYellow;
-        string finalOutput = new string(outputText.ToArray());
-        Console.Write(finalOutput);
+        Console.WriteLine("Wich alphabet do you want to use (english/turkish) (e/t)?");
         Console.ResetColor();
+
+        string? alphabetType = Console.ReadLine()?.ToLower();
+
+        if (alphabetType is null) return;
+
+        if (alphabetType == "t" || alphabetType == "turkish")
+        {
+            _rawAlphabet = "abcçdefgğhıijklmnoöprsştuüvyz";
+        }
+        else if (alphabetType == "e" || alphabetType == "english")
+        {
+            _rawAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        }
+
+        if (_rawAlphabet is null)
+        {
+            Console.WriteLine("Please enter a valid alphabet (e/t, turkish, english): ");
+            return;
+        }
+        _alphabet = _rawAlphabet.ToCharArray().ToList();
+        
+        int alphabetLength = _alphabet.Count;
+
+        while (true)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Enter a text you want to encrypt: ");
+            Console.ResetColor();
+        
+            string? inputText = Console.ReadLine();
+            if (inputText is null) 
+            {
+                Console.WriteLine("Input cannot be null, exiting...");
+                return;
+            }
+        
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Enter the number of scroll (-3, +3): ");
+            Console.ResetColor();
+        
+            string? inputScrollNumber = Console.ReadLine();
+            if(int.TryParse(inputScrollNumber, out int scrollNumber) == false)
+            {
+                Console.WriteLine("Invalid scroll number, exiting...");
+                return;
+            }
+
+            List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
+
+            EncryptWithCaesarCipher(outputText, scrollNumber, alphabetLength);
+        
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            string finalOutput = new string(outputText.ToArray());
+            Console.Write(finalOutput);
+            Console.ResetColor();
+        }
     }
 
     public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int alphabetLength)
@@ -77,32 +103,17 @@ public class Program
         for (int i = 0; i < outputText.Count; i++)
         {
             char currentLetter = outputText[i];
-            int currentLettersAlphabetIndex = _turkishAlphabet.IndexOf(currentLetter);
+            int currentLettersAlphabetIndex = _alphabet.IndexOf(currentLetter);
 
-            if (!_turkishAlphabet.Contains(currentLetter))
+            if (!_alphabet.Contains(currentLetter))
             {
                 continue;
             }
             
             int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
                 alphabetLength + alphabetLength) % alphabetLength;
-            currentLetter = _turkishAlphabet[newIndex];
+            currentLetter = _alphabet[newIndex];
             outputText[i] = currentLetter;
         }
-    }
-
-    private static void GetTurkishAlphabetFromEnvironment()
-    {
-        Env.Load();
-            
-        string? rawAlphabet = Environment.GetEnvironmentVariable("TurkishAlphabet");
-
-        if (rawAlphabet is null)
-        {
-            Console.WriteLine("There is an issue with accessing the alphabet, sorry!");
-            return;
-        }
-        
-        _turkishAlphabet = rawAlphabet.ToCharArray().ToList();
     }
 }
