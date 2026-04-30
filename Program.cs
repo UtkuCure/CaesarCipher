@@ -3,8 +3,10 @@
 
 /*
  * This is a simple Caesar Cipher implementation in C#. It takes a user input string and a scroll number, then shifts
- * each letter in the string by the specified number of positions in the Turkish alphabet. The Turkish alphabet is
- * loaded from an environment variable for flexibility. Non-alphabet characters are left unchanged.
+ * each letter in the string by the specified number of positions in the selected alphabet. Non-alphabet characters are
+ * left unchanged.
+ *
+ * English and Turkish alphabet supported.
  * 
  * Note: DO NOT USE THIS METHOD IF YOU ARE ENCRYPTING AN IMPORTANT DATA, USE THIS EDUCATION PURPOSE ONLY!
  * 
@@ -38,7 +40,7 @@ public class Program
     public static void Main(string[] args)
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.WriteLine("Wich alphabet do you want to use (english/turkish) (e/t)?");
+        Console.WriteLine("Which alphabet do you want to use (english/turkish) (e/t)?");
         Console.ResetColor();
 
         string? alphabetType = Console.ReadLine()?.ToLower();
