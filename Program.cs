@@ -95,7 +95,7 @@ public class Program
         
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             string finalOutput = new string(outputText.ToArray());
-            Console.Write(finalOutput);
+            Console.WriteLine(finalOutput);
             Console.ResetColor();
         }
     }
