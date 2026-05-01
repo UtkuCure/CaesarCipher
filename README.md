@@ -4,9 +4,8 @@
 
 ## Overview
 
-A simple Caesar Cipher implementation in C# that shifts each letter in a given string by a specified number of positions within the **Turkish alphabet**. Non-alphabet characters are left untouched.
-
-The Turkish alphabet is loaded from an **environment variable**, making it flexible and easy to configure without changing the source code.
+A simple Caesar Cipher implementation in English and Turkish alphabets. It will scroll your input texts every letter by 
+the scroll number you enter.
 
 ## How It Works
 
@@ -18,12 +17,9 @@ The Turkish alphabet is loaded from an **environment variable**, making it flexi
 4. Output the encrypted string.
 
 ## Usage
-
-Turkish alphabet is alredy setted but to make it work, you should delete the '.example' from the name of '.env.example'. It should be '.env'
-
-If you want to change alphabet **do not** change the name of variable (TurkishAlphabet), just enter the alphabet you want as value of TurkishAlphabet
-
-Then run the program and follow the prompts.
+* Open a terminal in the project directory and run with 'dotnet run'.
+* Enter a text you want to encrypt 
+* Enter a shift number. The program will output the encrypted text.
 
 ## ⚠️ Security Warning
 
