@@ -28,7 +28,6 @@
  * Date: 23/04/2026
  */
 
-using DotNetEnv;
 using System.Globalization;
 
 namespace CaesarCipher;
