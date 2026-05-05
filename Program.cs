@@ -87,14 +87,10 @@ public class Program
                 Console.WriteLine("Invalid scroll number, exiting...");
                 return;
             }
-
-            List<char> outputText = inputText.ToLower(new CultureInfo("tr-TR")).ToCharArray().ToList();
-
-            EncryptWithCaesarCipher(outputText, scrollNumber, alphabetLength);
-        
+            string outputText = CaesarCipher.EncryptWithCaesarCipher(inputText, scrollNumber, null, "turkish");
+            
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            string finalOutput = new string(outputText.ToArray());
-            Console.WriteLine(finalOutput);
+            Console.WriteLine(outputText);
             Console.ResetColor();
         }
     }
