@@ -87,7 +87,7 @@ public class Program
                 Console.WriteLine("Invalid scroll number, exiting...");
                 return;
             }
-            string outputText = CaesarCipher.EncryptWithCaesarCipher(inputText, 5, null, "turkish");
+            string outputText = CaesarCipher.EncryptWithCaesarCipher(inputText, scrollNumber, null, "turkish");
             
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(outputText);

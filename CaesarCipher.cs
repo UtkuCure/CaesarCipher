@@ -13,9 +13,9 @@ using System.Globalization;
 
 namespace CaesarCipher;
 
-public class CaesarCipher
+public static class CaesarCipher
 {
-    public string EncryptWithCaesarCipher(string inputText, int scrollNumber, string? alphabet, string? alphabetType)
+    public static string EncryptWithCaesarCipher(string inputText, int scrollNumber, string? alphabet, string? alphabetType)
     {
         if (alphabetType == "turkish" || alphabetType == "t")
         {
@@ -54,13 +54,16 @@ public class CaesarCipher
             currentLetter = outputText[i];
             currentLettersAlphabetIndex = alphabet.IndexOf(currentLetter);
             
-            newIndex = (currentLettersAlphabetIndex + scrollNumber) % alphabet.Length;
+            newIndex = ((currentLettersAlphabetIndex + scrollNumber) %
+                alphabet.Length + alphabet.Length) % alphabet.Length;
             
+            //if (newIndex < 0 || newIndex >= alphabet.Length) return string.Empty;
             newLetter = alphabet[newIndex];
             
             outputTextList[i] = newLetter;
         }
-
+        
+        outputText = new string(outputTextList.ToArray());
         return outputText;
     }
 }
