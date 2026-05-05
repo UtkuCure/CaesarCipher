@@ -15,7 +15,8 @@ namespace CaesarCipher;
 
 public static class CaesarCipher
 {
-    public static string EncryptWithCaesarCipher(string inputText, int scrollNumber, string? alphabet, string? alphabetType)
+    public static string EncryptWithCaesarCipher(
+        string inputText, int scrollNumber, string? alphabet, string? alphabetType)
     {
         if (alphabetType == "turkish" || alphabetType == "t")
         {
