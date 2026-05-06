@@ -27,15 +27,13 @@
  * Author: Utku Cüre, UtkuCure
  * Date: 23/04/2026
  */
-
-using System.Globalization;
-
 namespace CaesarCipher;
+
 public class Program
 {
     static List<char> _alphabet = new List<char>();
     private static string? _rawAlphabet;
-    
+
     public static void Main(string[] args)
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -60,8 +58,9 @@ public class Program
             Console.WriteLine("Please enter a valid alphabet (e/t, turkish, english): ");
             return;
         }
+
         _alphabet = _rawAlphabet.ToCharArray().ToList();
-        
+
         int alphabetLength = _alphabet.Count;
 
         while (true)
@@ -69,48 +68,31 @@ public class Program
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Enter a text you want to encrypt: ");
             Console.ResetColor();
-        
+
             string? inputText = Console.ReadLine();
-            if (inputText is null) 
+            if (inputText is null)
             {
                 Console.WriteLine("Input cannot be null, exiting...");
                 return;
             }
-        
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Enter the number of scroll (-3, +3): ");
             Console.ResetColor();
-        
+
             string? inputScrollNumber = Console.ReadLine();
-            if(int.TryParse(inputScrollNumber, out int scrollNumber) == false)
+            if (int.TryParse(inputScrollNumber, out int scrollNumber) == false)
             {
                 Console.WriteLine("Invalid scroll number, exiting...");
                 return;
             }
-            string outputText = CaesarCipher.EncryptWithCaesarCipher(inputText, scrollNumber, null, "turkish");
-            
+
+            string outputText = CaesarCipher.EncryptWithCaesarCipher(
+                inputText, scrollNumber, _rawAlphabet, alphabetType);
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(outputText);
             Console.ResetColor();
-        }
-    }
-
-    public static void EncryptWithCaesarCipher(List<char> outputText, int scrollNumber, int alphabetLength)
-    {
-        for (int i = 0; i < outputText.Count; i++)
-        {
-            char currentLetter = outputText[i];
-            int currentLettersAlphabetIndex = _alphabet.IndexOf(currentLetter);
-
-            if (!_alphabet.Contains(currentLetter))
-            {
-                continue;
-            }
-            
-            int newIndex = ((currentLettersAlphabetIndex + scrollNumber) % 
-                alphabetLength + alphabetLength) % alphabetLength;
-            currentLetter = _alphabet[newIndex];
-            outputText[i] = currentLetter;
         }
     }
 }
