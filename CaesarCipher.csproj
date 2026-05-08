@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetEnv" Version="3.2.0" />
+    <Compile Remove="CaesarCipherTests\**" />
+    <None Remove="CaesarCipherTests\**" />
+    <EmbeddedResource Remove="CaesarCipherTests\**" />
+    <Content Remove="CaesarCipherTests\**" />
   </ItemGroup>
 
 </Project>
