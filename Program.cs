@@ -29,7 +29,7 @@
  */
 namespace CaesarCipher;
 
-public class Program
+internal class Program
 {
     static List<char> _alphabet = new List<char>();
     private static string? _rawAlphabet;
